@@ -1,8 +1,8 @@
 package com.jin.notemanagerjc.repositories
 
 import com.jin.notemanagerjc.model.NoteItem
-import jakarta.inject.Inject
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
 class ApiImpl @Inject constructor() : Api {
 

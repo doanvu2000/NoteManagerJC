@@ -1,7 +1,7 @@
 package com.jin.notemanagerjc.repositories
 
 import android.util.Log
-import jakarta.inject.Inject
+import javax.inject.Inject
 
 class MainLogImpl @Inject constructor() : MainLog {
     override fun i(tag: String, msg: String) {
