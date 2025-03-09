@@ -47,4 +47,8 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+    fun log(tag: String, msg: String) {
+        log.i(tag, msg)
+    }
 }

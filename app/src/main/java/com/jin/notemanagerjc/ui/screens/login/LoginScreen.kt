@@ -8,6 +8,7 @@ import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,11 +28,8 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
     ) {
         when (state.value.state) {
-            is LoadStatus.Init -> TODO()
-            is LoadStatus.Error -> {
-                mainViewModel.setError(state.value.state.description)
-                viewModel.reset()
-
+            is LoadStatus.Init -> {
+                viewModel.log("LoginScreen", "Init")
                 OutlinedTextField(value = state.value.userName, onValueChange = {
                     viewModel.updateUserName(it)
                 }, modifier = Modifier.padding(16.dp), label = { Text("Username") })
@@ -47,13 +45,20 @@ fun LoginScreen(
                 }
             }
 
+            is LoadStatus.Error -> {
+                mainViewModel.setError(state.value.state.description)
+                viewModel.reset()
+            }
+
             is LoadStatus.Loading -> {
                 CircularProgressIndicator()
             }
 
             is LoadStatus.Success -> {
                 //navigate to HomeScreen
-                navController.navigate(Screen.Home.route)
+                LaunchedEffect(Unit) {
+                    navController.navigate(Screen.Home.route)
+                }
             }
         }
     }
